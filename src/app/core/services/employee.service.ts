@@ -39,6 +39,52 @@ export class EmployeeService {
   }
 
   /**
+   * Create a new employee
+   * @param name Employee name
+   * @param email Employee email
+   * @param role Employee role
+   * @returns Observable<EmployeeApiResponse> - Created employee data
+   */
+  createEmployee(name: string, email: string, role: string): Observable<EmployeeApiResponse> {
+    const body = { name, email, role };
+    return this.http.post<EmployeeApiResponse>(this.API_URL, body).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error, 'Failed to create employee');
+      })
+    );
+  }
+
+  /**
+   * Update an existing employee
+   * @param id Employee ID
+   * @param name Employee name
+   * @param email Employee email
+   * @param role Employee role
+   * @returns Observable<EmployeeApiResponse> - Updated employee data
+   */
+  updateEmployee(id: string, name: string, email: string, role: string): Observable<EmployeeApiResponse> {
+    const body = { name, email, role };
+    return this.http.put<EmployeeApiResponse>(`${this.API_URL}/${id}`, body).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error, `Failed to update employee with ID: ${id}`);
+      })
+    );
+  }
+
+  /**
+   * Delete an employee
+   * @param id Employee ID
+   * @returns Observable<void>
+   */
+  deleteEmployee(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error, `Failed to delete employee with ID: ${id}`);
+      })
+    );
+  }
+
+  /**
    * Handle HTTP errors
    * @param error HttpErrorResponse
    * @param defaultMessage Default error message

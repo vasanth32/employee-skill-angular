@@ -26,13 +26,27 @@ export class SkillService {
   }
 
   /**
+   * Create a new skill
+   * @param skillName Name of the skill
+   * @returns Observable<SkillResponse> - Created skill data
+   */
+  createSkill(skillName: string): Observable<SkillResponse> {
+    const body = { skillName };
+    return this.http.post<SkillResponse>(this.API_URL, body).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error, 'Failed to create skill');
+      })
+    );
+  }
+
+  /**
    * Rate a skill for an employee
    * @param employeeId Employee ID
    * @param request Skill rating request
    * @returns Observable<EmployeeSkillResponse> - Updated employee skill
    */
   rateSkill(employeeId: string, request: EmployeeSkillRateRequest): Observable<EmployeeSkillResponse> {
-    const url = `${this.API_URL}/employee/${employeeId}/rate`;
+    const url = `${this.API_URL}/employees/${employeeId}/skills`;
     return this.http.post<EmployeeSkillResponse>(url, request).pipe(
       catchError((error: HttpErrorResponse) => {
         return this.handleError(error, `Failed to rate skill for employee: ${employeeId}`);

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { EmployeeSearchResult } from '../../models/search.models';
+import { SearchResult, EmployeeSearchResult } from '../../models/search.models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,34 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   /**
+   * Search all with optional filters
+   * @param skill Optional skill name filter
+   * @param minRating Optional minimum rating filter
+   * @returns Observable<SearchResult[]> - Array of search results
+   */
+  search(skill?: string, minRating?: number): Observable<SearchResult[]> {
+    let params = new HttpParams();
+
+    if (skill) {
+      params = params.set('skill', skill);
+    }
+
+    if (minRating !== undefined && minRating !== null) {
+      params = params.set('minRating', minRating.toString());
+    }
+
+    return this.http.get<SearchResult[]>(this.API_URL, { params }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleError(error, 'Failed to search');
+      })
+    );
+  }
+
+  /**
    * Search employees with optional filters
    * Uses Elasticsearch-based search
+   * Note: This method may return EmployeeSearchResult[] for component compatibility
+   * Use search() method for SearchResult[] format as per API documentation
    * @param skill Optional skill name filter
    * @param minRating Optional minimum rating filter
    * @returns Observable<EmployeeSearchResult[]> - Array of matching employee search results

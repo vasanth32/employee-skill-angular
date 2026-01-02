@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { LoginRequest, AuthResponse } from '../../models/auth.models';
+import { LoginRequest, RegisterRequest, AuthResponse } from '../../models/auth.models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,31 @@ export class AuthService {
   public authStatus$ = this.authStatusSubject.asObservable();
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Register a new user
+   * @param name User name
+   * @param email User email
+   * @param password User password
+   * @param role User role
+   * @returns Observable<AuthResponse>
+   */
+  register(name: string, email: string, password: string, role: string = 'User'): Observable<AuthResponse> {
+    const registerRequest: RegisterRequest = { name, email, password, role };
+
+    return this.http.post<AuthResponse>(`${this.API_URL}/register`, registerRequest).pipe(
+      tap((response: AuthResponse) => {
+        // Store token and role in localStorage
+        this.setToken(response.token);
+        this.setRole(response.role);
+        this.authStatusSubject.next(true);
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.handleError(error);
+        return throwError(() => error);
+      })
+    );
+  }
 
   /**
    * Login with email and password
