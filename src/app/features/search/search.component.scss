@@ -1,0 +1,280 @@
+.search-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+    margin-bottom: 16px;
+
+    mat-card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 24px;
+        font-weight: 500;
+
+        mat-icon {
+            font-size: 28px;
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    mat-card-subtitle {
+        margin-top: 4px;
+        color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+mat-card-content {
+    padding-top: 16px;
+}
+
+// Search Form
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.skill-field,
+.rating-field {
+    width: 100%;
+
+    mat-icon[matPrefix] {
+        margin-right: 8px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+
+    button {
+        min-width: 120px;
+
+        mat-icon {
+            margin-right: 4px;
+        }
+    }
+}
+
+// Loading Container
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 16px;
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 16px;
+    }
+}
+
+// Error Container
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 16px;
+
+    .error-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: #f44336;
+        margin-bottom: 8px;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        max-width: 400px;
+    }
+
+    button {
+        margin-top: 8px;
+    }
+}
+
+// Empty Container
+.empty-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 16px;
+
+    .empty-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: rgba(0, 0, 0, 0.38);
+        margin-bottom: 8px;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        max-width: 400px;
+    }
+}
+
+// Results Container
+.results-container {
+    margin-top: 24px;
+}
+
+.results-header {
+    margin-bottom: 16px;
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.search-results-table {
+    width: 100%;
+    background: white;
+
+    th {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 14px;
+    }
+
+    td {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 14px;
+    }
+
+    tr.mat-row {
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+    }
+}
+
+// Role Badge
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.87);
+
+    &.role-admin {
+        background-color: #ffebee;
+        color: #c62828;
+    }
+
+    &.role-manager {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+
+    &.role-employee {
+        background-color: #f1f8e9;
+        color: #558b2f;
+    }
+
+    &.role-user {
+        background-color: #fce4ec;
+        color: #c2185b;
+    }
+}
+
+// Rating Display
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+
+    .rating-number {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 500;
+    }
+
+    &.rating-high {
+        color: #4caf50;
+    }
+
+    &.rating-medium {
+        color: #ff9800;
+    }
+
+    &.rating-low {
+        color: #f44336;
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .search-container {
+        padding: 16px;
+    }
+
+    .search-results-table {
+        font-size: 12px;
+
+        th,
+        td {
+            padding: 8px 4px;
+        }
+    }
+}

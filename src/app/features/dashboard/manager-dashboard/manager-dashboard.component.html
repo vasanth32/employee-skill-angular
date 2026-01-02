@@ -1,0 +1,177 @@
+<div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1>
+            <mat-icon>dashboard</mat-icon>
+            Manager Dashboard
+        </h1>
+        <p class="subtitle">Overview of employees and skills</p>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading dashboard data...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="error-container">
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        <h3>Error Loading Dashboard</h3>
+        <p>{{ errorMessage }}</p>
+        <button mat-raised-button color="primary" (click)="retry()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+        </button>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div *ngIf="!isLoading && !hasError" class="dashboard-content">
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <mat-card class="summary-card">
+                <mat-card-content>
+                    <div class="card-content">
+                        <div class="card-icon employees">
+                            <mat-icon>people</mat-icon>
+                        </div>
+                        <div class="card-info">
+                            <h3>{{ summary.totalEmployees }}</h3>
+                            <p>Total Employees</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="summary-card">
+                <mat-card-content>
+                    <div class="card-content">
+                        <div class="card-icon skills">
+                            <mat-icon>category</mat-icon>
+                        </div>
+                        <div class="card-info">
+                            <h3>{{ summary.totalSkills }}</h3>
+                            <p>Total Skills</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="summary-card">
+                <mat-card-content>
+                    <div class="card-content">
+                        <div class="card-icon rating">
+                            <mat-icon>star</mat-icon>
+                        </div>
+                        <div class="card-info">
+                            <h3>{{ summary.averageRating.toFixed(1) }}</h3>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="summary-card">
+                <mat-card-content>
+                    <div class="card-content">
+                        <div class="card-icon employees-skills">
+                            <mat-icon>person_add</mat-icon>
+                        </div>
+                        <div class="card-info">
+                            <h3>{{ summary.employeesWithSkills }}</h3>
+                            <p>Employees with Skills</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Quick Navigation -->
+        <mat-card class="navigation-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>navigation</mat-icon>
+                    Quick Navigation
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="navigation-buttons">
+                    <button mat-raised-button color="primary" routerLink="/employees">
+                        <mat-icon>people</mat-icon>
+                        View All Employees
+                    </button>
+                    <button mat-raised-button color="accent" routerLink="/search">
+                        <mat-icon>search</mat-icon>
+                        Search Employees
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Employee List -->
+        <mat-card class="employees-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>list</mat-icon>
+                    Recent Employees
+                </mat-card-title>
+                <mat-card-subtitle>Latest {{ getRecentEmployees().length }} employees</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngIf="employees.length === 0" class="empty-state">
+                    <mat-icon>people_outline</mat-icon>
+                    <p>No employees found</p>
+                </div>
+                <div *ngIf="employees.length > 0" class="table-container">
+                    <table mat-table [dataSource]="getRecentEmployees()" class="employees-table">
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
+                        </ng-container>
+
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef>Email</th>
+                            <td mat-cell *matCellDef="let employee">
+                                <a [href]="'mailto:' + employee.email" class="email-link">
+                                    {{ employee.email }}
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <!-- Role Column -->
+                        <ng-container matColumnDef="role">
+                            <th mat-header-cell *matHeaderCellDef>Role</th>
+                            <td mat-cell *matCellDef="let employee">
+                                <span class="role-badge" [class]="'role-' + employee.role.toLowerCase()">
+                                    {{ employee.role }}
+                                </span>
+                            </td>
+                        </ng-container>
+
+                        <!-- Actions Column -->
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Actions</th>
+                            <td mat-cell *matCellDef="let employee">
+                                <button mat-icon-button color="primary" [routerLink]="['/employees']"
+                                    [queryParams]="{id: employee.employeeId}">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                </div>
+                <div *ngIf="employees.length > 5" class="view-all">
+                    <button mat-button color="primary" routerLink="/employees">
+                        View All Employees ({{ employees.length }})
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

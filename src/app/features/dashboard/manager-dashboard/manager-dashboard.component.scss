@@ -1,0 +1,367 @@
+.dashboard-container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+// Header
+.dashboard-header {
+    margin-bottom: 24px;
+
+    h1 {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+        font-size: 32px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+
+        mat-icon {
+            font-size: 36px;
+            width: 36px;
+            height: 36px;
+        }
+    }
+
+    .subtitle {
+        margin: 8px 0 0 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 16px;
+    }
+}
+
+// Loading Container
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    gap: 16px;
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 16px;
+    }
+}
+
+// Error Container
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    text-align: center;
+    gap: 16px;
+
+    .error-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: #f44336;
+        margin-bottom: 8px;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        max-width: 400px;
+    }
+
+    button {
+        margin-top: 8px;
+    }
+}
+
+// Dashboard Content
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+// Summary Cards
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.summary-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0;
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon {
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        &.employees {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        &.skills {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        &.rating {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        &.employees-skills {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+    }
+
+    .card-info {
+        flex: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        p {
+            margin: 4px 0 0 0;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+// Navigation Card
+.navigation-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+        mat-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 500;
+
+            mat-icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    .navigation-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+
+        button {
+            flex: 1;
+            min-width: 200px;
+
+            mat-icon {
+                margin-right: 8px;
+            }
+        }
+    }
+}
+
+// Employees Card
+.employees-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 500;
+
+            mat-icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        mat-card-subtitle {
+            margin-top: 4px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+// Empty State
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 16px;
+
+    mat-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        color: rgba(0, 0, 0, 0.38);
+    }
+
+    p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+    }
+}
+
+// Table Container
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 16px;
+}
+
+.employees-table {
+    width: 100%;
+    background: white;
+
+    th {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 14px;
+    }
+
+    td {
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 14px;
+    }
+
+    tr.mat-row {
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+    }
+}
+
+// Email Link
+.email-link {
+    color: #1976d2;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #1565c0;
+        text-decoration: underline;
+    }
+}
+
+// Role Badge
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.87);
+
+    &.role-admin {
+        background-color: #ffebee;
+        color: #c62828;
+    }
+
+    &.role-manager {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+
+    &.role-employee {
+        background-color: #f1f8e9;
+        color: #558b2f;
+    }
+
+    &.role-user {
+        background-color: #fce4ec;
+        color: #c2185b;
+    }
+}
+
+// View All Button
+.view-all {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+    button {
+        mat-icon {
+            margin-left: 4px;
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 16px;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .employees-table {
+        font-size: 12px;
+
+        th,
+        td {
+            padding: 8px 4px;
+        }
+    }
+}

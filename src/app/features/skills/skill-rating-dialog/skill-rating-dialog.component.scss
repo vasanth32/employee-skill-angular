@@ -1,0 +1,111 @@
+h2[mat-dialog-title] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 24px 24px 16px 24px;
+    font-size: 20px;
+    font-weight: 500;
+
+    mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+mat-dialog-content {
+    padding: 0 24px;
+    min-width: 400px;
+    max-width: 500px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+// Error Message
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    color: #c62828;
+    font-size: 14px;
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+// Loading Skills
+.loading-skills {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+}
+
+// Form Fields
+.full-width {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+
+    mat-icon[matPrefix] {
+        margin-right: 8px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}
+
+// Checkbox Container
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+
+    mat-checkbox {
+        flex: 1;
+    }
+
+    .checkbox-icon {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+// Dialog Actions
+mat-dialog-actions {
+    padding: 16px 24px 24px 24px;
+    margin: 0;
+
+    button {
+        min-width: 100px;
+
+        .button-spinner {
+            display: inline-block;
+            margin-right: 8px;
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+    mat-dialog-content {
+        min-width: 300px;
+        max-width: 100%;
+    }
+}
